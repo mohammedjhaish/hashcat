@@ -151,18 +151,6 @@ DECLSPEC void m01400s (PRIVATE_AS u32 *w, const u32 pw_len, KERN_ATTR_FUNC_VECTO
    */
 
   /**
-   * digest
-   */
-
-  const u32 search[4] =
-  {
-    digests_buf[DIGESTS_OFFSET_HOST].digest_buf[DGST_R0],
-    digests_buf[DIGESTS_OFFSET_HOST].digest_buf[DGST_R1],
-    digests_buf[DIGESTS_OFFSET_HOST].digest_buf[DGST_R2],
-    digests_buf[DIGESTS_OFFSET_HOST].digest_buf[DGST_R3]
-  };
-
-  /**
    * reverse
    */
 
@@ -288,6 +276,18 @@ DECLSPEC void m01400s (PRIVATE_AS u32 *w, const u32 pw_len, KERN_ATTR_FUNC_VECTO
     wd_t = SHA256_EXPAND (wb_t, w6_t, we_t, wd_t); SHA256_STEP (SHA256_F0o, SHA256_F1o, d, e, f, g, h, a, b, c, wd_t, SHA256C3d);
     we_t = SHA256_EXPAND (wc_t, w7_t, wf_t, we_t); SHA256_STEP (SHA256_F0o, SHA256_F1o, c, d, e, f, g, h, a, b, we_t, SHA256C3e);
     wf_t = SHA256_EXPAND (wd_t, w8_t, w0_t, wf_t); SHA256_STEP (SHA256_F0o, SHA256_F1o, b, c, d, e, f, g, h, a, wf_t, SHA256C3f);
+
+    /**
+     * digest
+     */
+
+    const u32 search[4] =
+    {
+      digests_buf[DIGESTS_OFFSET_HOST].digest_buf[DGST_R0],
+      digests_buf[DIGESTS_OFFSET_HOST].digest_buf[DGST_R1],
+      digests_buf[DIGESTS_OFFSET_HOST].digest_buf[DGST_R2],
+      digests_buf[DIGESTS_OFFSET_HOST].digest_buf[DGST_R3]
+    };
 
     COMPARE_S_SIMD (d, h, c, g);
   }
